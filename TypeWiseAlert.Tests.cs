@@ -3,7 +3,6 @@ using Moq;
 
 namespace TypeWiseAlertTests
 {
-    // Define BreachType and CoolingType enums
     public enum BreachType
     {
         TOO_LOW,
@@ -23,18 +22,15 @@ namespace TypeWiseAlertTests
         public string Dummy { get; set; } 
     }
 
-    // Define a class with the methods under test
     public static class TypeWiseAlert
     {
         public static BreachType Mock_classifyTemperatureBreach(CoolingType coolingType, double temperatureInC)
         {
-            // Mock implementation
             return BreachType.NORMAL;
         }
 
         public static void checkAndAlert(string recipient, BatteryCharacter batteryChar, double temperature)
         {
-            // Method implementation
         }
     }
 
