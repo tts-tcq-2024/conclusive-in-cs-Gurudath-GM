@@ -1,5 +1,14 @@
+using System.Collections.Generic;
+
 public class BreachDetector
 {
+    static Dictionary<CoolingType, int> coolingLimits = new Dictionary<CoolingType, int>
+                {
+            { CoolingType.PASSIVE_COOLING, 35 },
+            { CoolingType.MED_ACTIVE_COOLING, 40 },
+            { CoolingType.HI_ACTIVE_COOLING, 45 }
+        };
+
     public enum BreachType 
     { 
         NORMAL, 
@@ -22,14 +31,7 @@ public class BreachDetector
 
     public static int getUpperLimit(CoolingType coolingType)
     {
-        int upperLimit = 0;
-        switch (coolingType)
-        {
-            case CoolingType.PASSIVE_COOLING: upperLimit = 35; break;
-            case CoolingType.MED_ACTIVE_COOLING: upperLimit = 40; break;
-            case CoolingType.HI_ACTIVE_COOLING: upperLimit = 45; break;
-        }
-        return upperLimit;
+        return coolingLimits.TryGetValue(coolingType, out int limit) ? limit : default;
     }
 
     public static BreachType classifyTemperatureBreach(CoolingType coolingType, double temperatureInC)
