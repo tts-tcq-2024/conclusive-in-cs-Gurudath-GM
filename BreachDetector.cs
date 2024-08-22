@@ -20,15 +20,22 @@ public class BreachDetector
         return BreachType.NORMAL;
     }
 
-    public static BreachType classifyTemperatureBreach(CoolingType coolingType, double temperatureInC)
+    public static int getUpperLimit(CoolingType coolingType)
     {
-        int lowerLimit = 0, upperLimit = 0;
+        int upperLimit = 0;
         switch (coolingType)
         {
             case CoolingType.PASSIVE_COOLING: upperLimit = 35; break;
             case CoolingType.MED_ACTIVE_COOLING: upperLimit = 40; break;
             case CoolingType.HI_ACTIVE_COOLING: upperLimit = 45; break;
         }
+        return upperLimit;
+    }
+
+    public static BreachType classifyTemperatureBreach(CoolingType coolingType, double temperatureInC)
+    {
+        int lowerLimit = 0, upperLimit = 0;
+        upperLimit = getUpperLimit(coolingType);
         return inferBreach(temperatureInC, lowerLimit, upperLimit);
     }
 }
